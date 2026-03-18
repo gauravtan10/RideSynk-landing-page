@@ -96,4 +96,42 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // 6. Waitlist Form Submission
+    const waitlistForm = document.getElementById("waitlistForm");
+    if (waitlistForm) {
+        waitlistForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const name = e.target.name.value;
+            const email = e.target.email.value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            // Optional loading state
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = "Joining...";
+            submitBtn.disabled = true;
+
+            try {
+                await fetch("https://hook.us2.make.com/q3oct9kq5pjpk67t9zomgv5c6cs9nsqk", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email
+                    })
+                });
+
+                alert("Thank you! Check your email.");
+                waitlistForm.reset();
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                alert("There was an error joining the waitlist. Please try again later.");
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
