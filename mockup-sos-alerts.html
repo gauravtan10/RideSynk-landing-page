@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RideSynk – SOS Alerts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#080810;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;}
+
+.phone{width:280px;height:580px;background:#0d0d16;border-radius:48px;border:2.5px solid #252535;position:relative;overflow:hidden;box-shadow:0 50px 120px rgba(0,0,0,0.95),0 0 0 1px #1a1a28,inset 0 1px 0 rgba(255,255,255,0.07),0 0 80px rgba(220,38,38,0.1);}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:26px;background:#0d0d16;border-radius:0 0 16px 16px;z-index:100;border:2.5px solid #252535;border-top:none;}
+.phone-inner{width:100%;height:100%;overflow:hidden;border-radius:46px;position:relative;}
+
+.dark-bg{position:absolute;inset:0;background:#08080f;}
+
+/* status bar */
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:34px 22px 0;font-size:11px;font-weight:700;color:#fff;position:absolute;top:0;left:0;right:0;z-index:50;}
+
+/* header */
+.hdr{position:absolute;top:60px;left:16px;right:16px;z-index:20;display:flex;align-items:center;gap:10px;}
+.back-btn{width:34px;height:34px;background:#141422;border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.hdr-title{font-size:14px;font-weight:800;color:#fff;}
+
+/* alert cards */
+.alert-list{position:absolute;top:106px;left:16px;right:16px;z-index:10;}
+.a-card{background:#121220;border-radius:16px;border:1px solid #1e1e30;padding:13px;margin-bottom:9px;}
+.a-card.active{border-color:#dc2626;}
+.a-row{display:flex;gap:10px;align-items:flex-start;}
+.a-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.a-icon.red{background:#dc2626;}
+.a-icon.grey{background:#1e1e2e;}
+.a-name{font-size:11px;font-weight:800;color:#fff;}
+.a-type{font-size:9px;color:#505070;margin-top:2px;}
+.badge-active{background:#dc2626;color:#fff;font-size:7.5px;font-weight:800;padding:2px 8px;border-radius:20px;text-transform:uppercase;}
+.badge-res{background:#0f2a18;color:#4ade80;font-size:7.5px;font-weight:800;padding:2px 8px;border-radius:20px;text-transform:uppercase;}
+.a-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.a-meta span{font-size:8.5px;color:#505070;}
+.a-btns{display:flex;gap:7px;margin-top:10px;}
+.btn-call{flex:1;height:33px;background:#dc2626;border-radius:9px;display:flex;align-items:center;justify-content:center;gap:5px;font-size:9.5px;font-weight:800;color:#fff;}
+.btn-res{flex:1;height:33px;background:#1a1a28;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;color:#808098;}
+
+/* dim overlay */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,0.62);z-index:40;border-radius:46px;}
+
+/* modal */
+.modal{position:absolute;top:50%;left:16px;right:16px;transform:translateY(-58%);background:#14141f;border:1.5px solid #dc2626;border-radius:22px;padding:22px;z-index:55;}
+.modal-ring{width:58px;height:58px;background:#dc2626;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:28px;box-shadow:0 0 0 8px rgba(220,38,38,0.18);}
+.modal-h{text-align:center;font-size:15px;font-weight:800;color:#fff;margin-bottom:5px;}
+.modal-sub{text-align:center;font-size:10.5px;color:#808098;margin-bottom:3px;}
+.modal-loc{text-align:center;font-size:9.5px;color:#505068;margin-bottom:18px;}
+.modal-btns{display:flex;gap:9px;}
+.mb-call{flex:1;height:38px;background:#dc2626;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:10.5px;font-weight:800;color:#fff;}
+.mb-dis{flex:1;height:38px;background:#1c1c2a;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#808098;}
+
+/* pulse animation on modal ring */
+@keyframes glow{0%,100%{box-shadow:0 0 0 8px rgba(220,38,38,0.18)}50%{box-shadow:0 0 0 14px rgba(220,38,38,0.08)}}
+.modal-ring{animation:glow 2s ease-in-out infinite;}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="phone-inner">
+    <div class="dark-bg"></div>
+
+    <!-- Status bar -->
+    <div class="sbar">
+      <span>9:41</span>
+      <div style="display:flex;gap:5px;align-items:center;">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="white"><rect x="0" y="6" width="3" height="4" rx="0.6"/><rect x="3.5" y="4" width="3" height="6" rx="0.6"/><rect x="7" y="2" width="3" height="8" rx="0.6"/><rect x="10.5" y="0" width="3" height="10" rx="0.6"/></svg>
+        <span style="font-size:10px;font-weight:700;color:#fff;">84%</span>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="hdr">
+      <div class="back-btn">
+        <svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M7 2L3 5L7 8" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <span class="hdr-title">SOS Alerts</span>
+    </div>
+
+    <!-- Alert cards (behind modal) -->
+    <div class="alert-list">
+      <!-- Active alert -->
+      <div class="a-card active">
+        <div class="a-row">
+          <div class="a-icon red">⚠️</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="a-name">Sarah Mitchell</div>
+              <div class="badge-active">Active</div>
+            </div>
+            <div class="a-type">Fall Detected</div>
+          </div>
+        </div>
+        <div class="a-meta">
+          <span>📍 Highway Junction, KM 34</span>
+          <span>🕐 2 min ago</span>
+        </div>
+        <div class="a-btns">
+          <div class="btn-call">📞 Call</div>
+          <div class="btn-res">Resolve</div>
+        </div>
+      </div>
+      <!-- Resolved alert -->
+      <div class="a-card">
+        <div class="a-row">
+          <div class="a-icon grey">⚠️</div>
+          <div style="flex:1;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div class="a-name">Mike Chen</div>
+              <div class="badge-res">Resolved</div>
+            </div>
+            <div class="a-type">Manual SOS</div>
+          </div>
+        </div>
+        <div class="a-meta">
+          <span>📍 Coastal Road, KM 12</span>
+          <span>🕐 15 min ago</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dim overlay -->
+    <div class="dim"></div>
+
+    <!-- SOS Modal -->
+    <div class="modal">
+      <div class="modal-ring">⚠️</div>
+      <div class="modal-h">SOS Alert!</div>
+      <div class="modal-sub">Sarah Mitchell triggered an alert</div>
+      <div class="modal-loc">Highway Junction, KM 34 · 2 min ago</div>
+      <div class="modal-btns">
+        <div class="mb-call">📞 Call Now</div>
+        <div class="mb-dis">Dismiss</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
