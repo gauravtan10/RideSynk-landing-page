@@ -78,11 +78,36 @@
 
                     <!-- Step 1: icon LEFT, text RIGHT -->
                     <div class="step reveal fade-up">
-                        <div class="step-icon-wrap">
-                            <svg class="step-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 3L3 10.53L9.56 12.5L12 19L21 3Z" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                        <div class="mockup-wrapper">
+                          <div class="phone">
+                            <div class="phone-inner">
+                              <div class="map">
+                                <svg class="map-grid" width="280" height="580" xmlns="http://www.w3.org/2000/svg">
+                                  <defs><pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0L0 0 0 24" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs>
+                                  <rect width="280" height="580" fill="url(#g1)"/>
+                                </svg>
+                                <svg style="position:absolute;inset:0;" width="280" height="580">
+                                  <path d="M50,520 Q55,430 70,370 Q90,290 120,240 Q155,185 185,160 Q215,138 218,95" stroke="#2a3560" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.5"/>
+                                  <path d="M50,520 Q90,470 115,420 Q145,360 160,300 Q175,240 200,200 Q218,170 218,95" stroke="#232850" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.4"/>
+                                  <path d="M50,520 Q90,470 115,420 Q145,360 160,300 Q175,240 200,200 Q218,170 218,95" stroke="#4a5580" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.65"/>
+                                  <path d="M50,520 Q55,430 70,370 Q90,290 120,240 Q155,185 185,160 Q215,138 218,95" stroke="#3b82f6" stroke-width="5.5" fill="none" stroke-linecap="round" opacity="0.9"/>
+                                  <circle cx="50" cy="520" r="7" fill="#22c55e" stroke="#fff" stroke-width="2.5"/>
+                                  <circle cx="218" cy="95" r="7" fill="#ef4444" stroke="#fff" stroke-width="2.5"/>
+                                  <path d="M218,75 Q225,65 218,55 Q211,65 218,75Z" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
+                                </svg>
+                              </div>
+                              <div class="sbar"><span>9:41</span><div style="display:flex;gap:5px;align-items:center;"><svg width="14" height="10" viewBox="0 0 14 10" fill="white"><rect x="0" y="6" width="3" height="4" rx="0.6"/><rect x="3.5" y="4" width="3" height="6" rx="0.6"/><rect x="7" y="2" width="3" height="8" rx="0.6"/><rect x="10.5" y="0" width="3" height="10" rx="0.6"/></svg><span style="font-size:10px;font-weight:700;">84%</span></div></div>
+                              <div class="nav-banner"><div class="nb-arrow">↱</div><div><div class="nb-t1">Turn right on NH-48</div><div class="nb-t2">In 400 m · 12 min to next stop</div></div></div>
+                              <div class="topbar"><div class="trip-pill"><div class="trip-name">Goa Weekend Ride 🏍️</div></div><div class="stats"><div class="stat"><div class="lbl">Distance</div><div class="val">142 km</div></div><div class="stat"><div class="lbl">ETA</div><div class="val">2h 14m</div></div><div class="stat"><div class="lbl">Riders Live</div><div class="val">4/5</div></div></div></div>
+                              <div class="rdot" style="width:38px;height:38px;font-size:10px;left:28px;top:448px;background:#0d0d16;">ME<div class="gdot" style="width:12px;height:12px;background:#22c55e;"></div><div class="pulse-tracking" style="border-color:#fff;"></div></div>
+                              <div class="rdot" style="width:36px;height:36px;font-size:10px;left:95px;top:355px;background:#2563eb;border-color:#93c5fd;">RK<div class="gdot" style="width:11px;height:11px;background:#22c55e;"></div><div class="pulse-tracking" style="border-color:#93c5fd;animation-delay:0.4s;"></div></div>
+                              <div class="rdot" style="width:34px;height:34px;font-size:10px;left:128px;top:298px;background:#059669;border-color:#6ee7b7;">SM<div class="gdot" style="width:11px;height:11px;background:#22c55e;"></div></div>
+                              <div class="rdot" style="width:34px;height:34px;font-size:10px;left:158px;top:248px;background:#7c3aed;border-color:#c4b5fd;">AV<div class="gdot" style="width:11px;height:11px;background:#facc15;"></div><div class="pulse-tracking" style="border-color:#c4b5fd;animation-delay:0.8s;"></div></div>
+                              <div class="mctrl" style="top:42%;right:15px;"><div class="mc">⊞</div><div class="mc" style="font-size:13px;">◎</div><div class="mc">+</div><div class="mc" style="font-size:20px;padding-bottom:4px;">−</div></div>
+                              <div class="sos-btn">SOS</div>
+                              <div class="panel" style="height:178px;"><div class="drag"></div><div class="tabs"><div class="tab on">Plan</div><div class="tab">Members (5)</div><div class="tab">Chat</div></div><div class="timeline"><div class="spine"></div><div class="tl-row"><div class="tl-d done"></div><div><div class="t1">Pune, Maharashtra</div><div class="t2">Start Point</div><div class="t-eta">07:00 AM</div></div></div><div class="tl-row"><div class="tl-d curr"></div><div><div class="t1">Kolhapur Stop</div><div class="t2">Stop 1 · Current</div></div></div><div class="tl-row"><div class="tl-d end"></div><div><div class="t1">Panaji, Goa</div><div class="t2">End Point</div></div></div></div></div>
+                            </div>
+                          </div>
                         </div>
                         <div class="step-text">
                             <h3 class="step-title">Real-Time<br>Rider Tracking</h3>
@@ -93,12 +118,38 @@
 
                     <!-- Step 2: text LEFT, icon RIGHT -->
                     <div class="step step-reverse reveal fade-up">
-                        <div class="step-icon-wrap">
-                            <svg class="step-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
-                                    fill="currentColor" />
-                            </svg>
+                        <div class="mockup-wrapper">
+                          <div class="phone">
+                            <div class="phone-inner">
+                              <div class="screen-bg"></div>
+                              <div class="sbar"><span>9:41</span><div style="display:flex;gap:5px;align-items:center;"><svg width="14" height="10" viewBox="0 0 14 10" fill="white"><rect x="0" y="6" width="3" height="4" rx="0.6"/><rect x="3.5" y="4" width="3" height="6" rx="0.6"/><rect x="7" y="2" width="3" height="8" rx="0.6"/><rect x="10.5" y="0" width="3" height="10" rx="0.6"/></svg><span style="font-size:10px;font-weight:700;color:#fff;">84%</span></div></div>
+                              <div class="hdr"><div class="back-btn"><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M7 2L3 5L7 8" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><div><div class="hdr-name">Ride Members</div><div class="hdr-sub">Goa Weekend Ride</div></div></div>
+                              <div class="rider-badge"><div class="rb-pulse"></div> 4 Live</div>
+                              <div class="members-card">
+                                <div class="mem-row"><div class="m-av" style="background:#0d0d16;border:2px solid #fff;">ME<div class="st-dot st-live"></div></div><div style="flex:1;"><div class="m-name">Gaurav T. <span style="color:#505070;font-weight:400;">(you)</span></div><div class="m-bike">Triumph Tiger 900</div></div><div class="m-tag t-you">You · Live</div></div>
+                                <div class="mem-row"><div class="m-av" style="background:#2563eb;">RK<div class="st-dot st-live"></div></div><div style="flex:1;"><div class="m-name">Rahul Kumar</div><div class="m-bike">Royal Enfield 650 · 62 km/h</div></div><div class="m-tag t-live">Live</div></div>
+                                <div class="mem-row"><div class="m-av" style="background:#059669;">SM<div class="st-dot st-live"></div></div><div style="flex:1;"><div class="m-name">Sarah M.</div><div class="m-bike">KTM Duke 390 · 58 km/h</div></div><div class="m-tag t-live">Live</div></div>
+                                <div class="mem-row"><div class="m-av" style="background:#44445a;">AV<div class="st-dot st-stale"></div></div><div style="flex:1;"><div class="m-name">Arjun V.</div><div class="m-bike">Bajaj Dominar 400</div></div><div class="m-tag t-stale">5 min ago</div></div>
+                                <div class="mem-row"><div class="m-av" style="background:#1e1e2e;">MC<div class="st-dot st-off"></div></div><div style="flex:1;"><div class="m-name">Mike Chen</div><div class="m-bike">Honda CB500X</div></div><div class="m-tag t-off">Offline</div></div>
+                              </div>
+                              <div class="mini-map">
+                                <svg width="100%" height="148" xmlns="http://www.w3.org/2000/svg">
+                                  <defs><pattern id="gm" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0L0 0 0 20" fill="none" stroke="white" stroke-width="0.35"/></pattern></defs>
+                                  <rect width="100%" height="148" fill="url(#gm)" opacity="0.2"/>
+                                  <path d="M35,128 Q90,100 132,75 Q175,50 225,28" stroke="#1e2a50" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.5"/>
+                                  <path d="M35,128 Q90,100 132,75 Q175,50 225,28" stroke="#3b82f6" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.75"/>
+                                  <circle cx="35" cy="128" r="7" fill="#0d0d16" stroke="#fff" stroke-width="2.5"/><text x="35" y="131.5" text-anchor="middle" font-size="7" font-weight="800" fill="white" font-family="sans-serif">ME</text>
+                                  <circle cx="105" cy="88" r="6" fill="#2563eb" stroke="#93c5fd" stroke-width="1.8"/><text x="105" y="91.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="white" font-family="sans-serif">RK</text>
+                                  <circle cx="142" cy="68" r="6" fill="#059669" stroke="#6ee7b7" stroke-width="1.8"/><text x="142" y="71.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="white" font-family="sans-serif">SM</text>
+                                  <circle cx="188" cy="44" r="5.5" fill="#44445a" stroke="#9ca3af" stroke-width="1.5"/><text x="188" y="47.5" text-anchor="middle" font-size="6" font-weight="800" fill="white" font-family="sans-serif">AV</text>
+                                  <circle cx="225" cy="28" r="6" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+                                  <path d="M225,18 Q229,11 225,5 Q221,11 225,18Z" fill="#ef4444" stroke="#fff" stroke-width="1"/>
+                                </svg>
+                                <div class="mm-label">Live Group Map</div>
+                                <div class="mm-live"><div class="mm-dot"></div> 4 Live</div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div class="step-text">
                             <h3 class="step-title">Group<br>Navigation</h3>
@@ -109,12 +160,20 @@
 
                     <!-- Step 3: icon LEFT, text RIGHT -->
                     <div class="step reveal fade-up">
-                        <div class="step-icon-wrap">
-                            <svg class="step-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11Z"
-                                    fill="currentColor" />
-                            </svg>
+                        <div class="mockup-wrapper">
+                          <div class="phone">
+                            <div class="phone-inner">
+                              <div class="dark-bg"></div>
+                              <div class="sbar"><span>9:41</span><div style="display:flex;gap:5px;align-items:center;"><svg width="14" height="10" viewBox="0 0 14 10" fill="white"><rect x="0" y="6" width="3" height="4" rx="0.6"/><rect x="3.5" y="4" width="3" height="6" rx="0.6"/><rect x="7" y="2" width="3" height="8" rx="0.6"/><rect x="10.5" y="0" width="3" height="10" rx="0.6"/></svg><span style="font-size:10px;font-weight:700;color:#fff;">84%</span></div></div>
+                              <div class="hdr"><div class="back-btn"><svg width="12" height="12" viewBox="0 0 10 10" fill="none"><path d="M7 2L3 5L7 8" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg></div><span class="hdr-title">SOS Alerts</span></div>
+                              <div class="alert-list">
+                                <div class="a-card active"><div class="a-row"><div class="a-icon red">⚠️</div><div style="flex:1;"><div style="display:flex;justify-content:space-between;align-items:center;"><div class="a-name">Sarah Mitchell</div><div class="badge-active">Active</div></div><div class="a-type">Fall Detected</div></div></div><div class="a-meta"><span>📍 Highway Junction, KM 34</span><span>🕐 2 min ago</span></div><div class="a-btns"><div class="btn-call">📞 Call</div><div class="btn-res">Resolve</div></div></div>
+                                <div class="a-card"><div class="a-row"><div class="a-icon grey">⚠️</div><div style="flex:1;"><div style="display:flex;justify-content:space-between;align-items:center;"><div class="a-name">Mike Chen</div><div class="badge-res">Resolved</div></div><div class="a-type">Manual SOS</div></div></div><div class="a-meta"><span>📍 Coastal Road, KM 12</span><span>🕐 15 min ago</span></div></div>
+                              </div>
+                              <div class="dim"></div>
+                              <div class="modal"><div class="modal-ring">⚠️</div><div class="modal-h">SOS Alert!</div><div class="modal-sub">Sarah Mitchell triggered an alert</div><div class="modal-loc">Highway Junction, KM 34 · 2 min ago</div><div class="modal-btns"><div class="mb-call">📞 Call Now</div><div class="mb-dis">Dismiss</div></div></div>
+                            </div>
+                          </div>
                         </div>
                         <div class="step-text">
                             <h3 class="step-title">Safety-Focused<br>Riding</h3>
@@ -125,14 +184,42 @@
 
                     <!-- Step 4: text LEFT, icon RIGHT -->
                     <div class="step step-reverse reveal fade-up">
-                        <div class="step-icon-wrap">
-                            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
+                        <div class="mockup-wrapper">
+                          <div class="phone">
+                            <div class="phone-inner">
+                              <div class="map">
+                                <svg class="map-grid" width="280" height="580" xmlns="http://www.w3.org/2000/svg">
+                                  <defs><pattern id="g4" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0L0 0 0 24" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs>
+                                  <rect width="280" height="580" fill="url(#g4)"/>
+                                </svg>
+                                <svg style="position:absolute;inset:0;" width="280" height="580">
+                                  <path d="M136,430 Q140,355 145,295 Q150,232 158,178 Q165,135 170,98" stroke="#1e2a50" stroke-width="22" fill="none" stroke-linecap="round" opacity="0.45"/>
+                                  <path d="M88,460 Q72,385 78,320 Q88,255 108,208 Q130,162 152,140 Q162,124 170,98" stroke="#2a2215" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.45"/>
+                                  <path d="M136,430 Q140,355 145,295 Q150,232 158,178 Q165,135 170,98" stroke="#3b82f6" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8"/>
+                                  <path d="M88,460 Q72,385 78,320 Q88,255 108,208 Q130,162 152,140 Q162,124 170,98" stroke="#f59e0b" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-dasharray="10 6" opacity="0.95"/>
+                                  <circle cx="138" cy="358" r="7" fill="#f59e0b" stroke="#fff" stroke-width="2"/>
+                                  <rect x="148" y="348" width="72" height="18" rx="5" fill="rgba(13,13,22,0.85)"/>
+                                  <text x="184" y="361" text-anchor="middle" font-size="8" fill="#f59e0b" font-weight="700" font-family="sans-serif">missed turn</text>
+                                  <circle cx="170" cy="98" r="8" fill="#ef4444" stroke="#fff" stroke-width="2.5"/>
+                                  <path d="M170,78 Q179,64 170,52 Q161,64 170,78Z" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
+                                  <circle cx="88" cy="460" r="9" fill="#0d0d16" stroke="#fff" stroke-width="2.5"/>
+                                  <text x="88" y="464" text-anchor="middle" font-size="8" font-weight="800" fill="white" font-family="sans-serif">ME</text>
+                                  <circle cx="152" cy="196" r="8" fill="#2563eb" stroke="#93c5fd" stroke-width="2"/>
+                                  <text x="152" y="199.5" text-anchor="middle" font-size="7.5" font-weight="800" fill="white" font-family="sans-serif">RK</text>
+                                  <circle cx="155" cy="240" r="7" fill="#059669" stroke="#6ee7b7" stroke-width="1.8"/>
+                                  <text x="155" y="243.5" text-anchor="middle" font-size="7" font-weight="800" fill="white" font-family="sans-serif">SM</text>
+                                  <line x1="20" y1="530" x2="44" y2="530" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+                                  <text x="48" y="534" font-size="8" fill="#6080b0" font-family="sans-serif">Pack route</text>
+                                  <line x1="20" y1="548" x2="44" y2="548" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+                                  <text x="48" y="552" font-size="8" fill="#6080b0" font-family="sans-serif">Your catch-up</text>
+                                </svg>
+                              </div>
+                              <div class="sbar"><span>9:41</span><div style="display:flex;gap:5px;align-items:center;"><svg width="14" height="10" viewBox="0 0 14 10" fill="white"><rect x="0" y="6" width="3" height="4" rx="0.6"/><rect x="3.5" y="4" width="3" height="6" rx="0.6"/><rect x="7" y="2" width="3" height="8" rx="0.6"/><rect x="10.5" y="0" width="3" height="10" rx="0.6"/></svg><span style="font-size:10px;font-weight:700;color:#fff;">84%</span></div></div>
+                              <div class="reroute-banner"><div class="rb-icon"><span class="spin-anim">↺</span></div><div><div class="rb1">Auto Rerouting…</div><div class="rb2">Catching up to your pack safely</div></div></div>
+                              <div class="catchup"><div class="cc-icon">🏍️</div><div><div class="cc1">Pack is 2.4 km ahead</div><div class="cc2">ETA to rejoin: ~6 min</div></div></div>
+                              <div class="route-card"><div class="rc-title">Catch-up Routes</div><div class="ro sel"><div class="ro-dot" style="background:#3b82f6;"></div><div><div class="ro-n">Via NH-48 Bypass</div><div class="ro-d">18 km · 22 min · Fastest</div></div><div class="ro-ck">✓</div></div><div class="ro alt"><div class="ro-dot" style="background:#3a3a50;"></div><div><div class="ro-n">Via City Centre</div><div class="ro-d">24 km · 34 min</div></div></div></div>
+                            </div>
+                          </div>
                         </div>
                         <div class="step-text">
                             <h3 class="step-title">Auto Reroute<br>Smart Routing</h3>
