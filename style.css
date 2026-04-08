@@ -406,7 +406,7 @@ a {
 }
 
 .timeline-wrapper.is-visible .timeline-line::before {
-    width: 50%;
+    width: 75%;
 }
 
 .timeline-items {
@@ -537,7 +537,7 @@ a {
     }
     
     .timeline-wrapper.is-visible .timeline-line::before {
-        height: 50%;
+        height: 75%;
         width: 100%;
     }
     
