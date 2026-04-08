@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logo Generator</title>
+</head>
+<body style="background: #111; color: white; font-family: sans-serif; text-align: center; padding: 50px;">
+    <h2>Generating your preview image...</h2>
+    <p>A file named <b>og-logo.png</b> should start downloading automatically.</p>
+    <canvas id="canvas" width="1200" height="630" style="display:none;"></canvas>
+    
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            
+            // Draw background
+            ctx.fillStyle = "#0d0d16";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw SVG Logo
+            var svgData = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+                    <path d="M 50 15 L 85 15 L 85 50 A 35 35 0 1 1 50 15 Z" fill="none" stroke="white" stroke-width="12" stroke-linejoin="miter" stroke-miterlimit="4" />
+                </svg>
+            `;
+            
+            var img = new Image();
+            var svg = new Blob([svgData], {type: "image/svg+xml;charset=utf-8"});
+            var url = DOMURL.createObjectURL(svg);
+            
+            img.onload = function() {
+                // Determine layout
+                var centerX = canvas.width / 2;
+                var centerY = canvas.height / 2;
+                
+                // Draw Icon
+                ctx.drawImage(img, centerX - 100, centerY - 150, 200, 200);
+                
+                // Draw Text
+                ctx.fillStyle = "white";
+                ctx.font = "bold 80px Outfit, sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("RideSynk", centerX, centerY + 120);
+                
+                // Download Image
+                var pngUrl = canvas.toDataURL("image/png");
+                var downloadLink = document.createElement("a");
+                downloadLink.href = pngUrl;
+                downloadLink.download = "og-logo.png";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                DOMURL.revokeObjectURL(url);
+            };
+            
+            var DOMURL = window.URL || window.webkitURL || window;
+            img.src = url;
+        }
+    </script>
+</body>
+</html>
