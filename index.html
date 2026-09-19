@@ -8,13 +8,13 @@
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="RideSynk | No Rider Left Behind">
     <meta property="og:description" content="Stay connected with your riding group. Track each other in real time, navigate together, and ride safe.">
-    <meta property="og:image" content="https://ridesynk.vercel.app/og-logo.png">
-    <meta property="og:url" content="https://ridesynk.vercel.app/">
+    <meta property="og:image" content="https://ridesynk.in/og-logo.png">
+    <meta property="og:url" content="https://ridesynk.in/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="RideSynk | No Rider Left Behind">
     <meta name="twitter:description" content="Stay connected with your riding group. Track each other in real time, navigate together, and ride safe.">
-    <meta name="twitter:image" content="https://ridesynk.vercel.app/og-logo.png">
+    <meta name="twitter:image" content="https://ridesynk.in/og-logo.png">
     <meta name="description"
         content="Stay connected with your riding group. Track each other in real time, navigate together, and ride safe.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,6 @@
     <nav class="navbar reveal fade-in">
         <div class="nav-container">
             <div class="nav-logo">RideSynk</div>
-            <a href="#waitlist" class="nav-cta">Waitlist</a>
         </div>
     </nav>
 
@@ -56,8 +55,15 @@
                     safe.
                 </p>
 
-                <div class="hero-actions reveal slide-up delay-3">
-                    <a href="#waitlist" class="btn btn-dark btn-large">Join the Waitlist</a>
+                <div class="hero-actions reveal slide-up delay-3" style="display: flex; flex-direction: column; gap: 1rem; align-items: center; justify-content: center;">
+                    <div style="display: flex; flex-direction: row; gap: 1rem; align-items: center; justify-content: center;">
+                        <a href="updates.html" class="btn btn-dark btn-large">Updates</a>
+                        <a href="https://app.ridesynk.in" id="tryNowBtn" class="btn btn-primary btn-large">Try Now</a>
+                    </div>
+                    <div class="pwa-hero-badge">
+                        <span class="pwa-dot"></span>
+                        Web App & PWA Live • Instant Access on Any Device
+                    </div>
                 </div>
             </div>
 
@@ -243,12 +249,11 @@
         </section>
 
 
-        <!-- 4. Timeline / Journey Section -->
+        <!-- 4. Timeline / Official Launch Section -->
         <section class="journey padding-y">
             <div class="container text-center">
-                <p class="idea-label reveal fade-up" style="letter-spacing: 0.3em; text-transform: uppercase;">Our
-                    Journey</p>
-                <h2 class="journey-headline reveal fade-up delay-1">How far we've come.</h2>
+                <p class="idea-label reveal fade-up" style="letter-spacing: 0.3em; text-transform: uppercase;">Official Launch</p>
+                <h2 class="journey-headline reveal fade-up delay-1">Officially Launched — September 19, 2026</h2>
 
                 <div class="timeline-wrapper reveal fade-up delay-2">
                     <div class="timeline-line"></div>
@@ -287,9 +292,7 @@
                             </div>
                         </div>
 
-
-
-                        <div class="timeline-item active interactive">
+                        <div class="timeline-item completed interactive">
                             <div class="timeline-dot">04</div>
                             <div class="timeline-content">
                                 <h3>BETA TESTING</h3>
@@ -300,11 +303,17 @@
                             </div>
                         </div>
 
-                        <div class="timeline-item upcoming">
+                        <div class="timeline-item completed active interactive">
                             <div class="timeline-dot">05</div>
                             <div class="timeline-content">
                                 <h3>OFFICIAL LAUNCH</h3>
-                                <div class="status-badge status-upcoming">UPCOMING</div>
+                                <div class="status-badge status-live">
+                                    <span class="status-live-dot"></span>
+                                    NOW LIVE • 9/19/2026
+                                </div>
+                                <div class="timeline-details" style="opacity: 1; max-height: 150px; transform: translateY(0);">
+                                    <p>RideSynk Progressive Web App is officially live for all riders as of September 19, 2026!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -326,19 +335,86 @@
             </div>
         </section>
 
-        <!-- 4. Waitlist Section -->
-        <section id="waitlist" class="waitlist dark-section padding-y">
-            <div class="container container-sm text-center reveal scale-up">
-                <h2 class="waitlist-title">The ride begins soon.</h2>
-                <p class="waitlist-desc">Be the first riders to experience RideSynk.</p>
+        <!-- 5. Feedback Section -->
+        <section id="feedback" class="feedback padding-y">
+            <div class="container container-sm text-center reveal fade-up">
+                <p class="idea-label">Feedback</p>
+                <h2 class="waitlist-title" style="color: var(--bg-dark);">We value your thoughts.</h2>
+                <p class="waitlist-desc" style="color: var(--text-secondary);">Help us make RideSynk even better for the community.</p>
 
-                <form id="waitlistForm" class="waitlist-form">
-                    <div class="input-row">
-                        <input type="text" name="name" placeholder="Full Name" required class="premium-input">
-                        <input type="email" name="email" placeholder="Email Address" required class="premium-input">
+                <!-- Feedback Tabs Switcher -->
+                <div class="feedback-tabs-nav reveal fade-up delay-1">
+                    <button type="button" class="fb-tab-btn active" id="btnTabFeedback">
+                        <span>✍️</span> Give Feedback
+                    </button>
+                    <button type="button" class="fb-tab-btn" id="btnTabResponses">
+                        <span>💬</span> View Responses <span class="fb-count-pill" id="fbResponsesCount">0</span>
+                    </button>
+                </div>
+
+                <!-- 1. Give Feedback View -->
+                <div id="feedbackFormContainer" class="feedback-view">
+                    <form id="feedbackForm" class="feedback-form">
+                        <div class="feedback-rating reveal fade-up delay-1">
+                            <div class="rating-badge">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>Community Experience Rating</span>
+                            </div>
+                            <div class="star-rating-container" id="starRatingContainer" role="radiogroup" aria-label="Rating out of 5 stars">
+                                <input type="radio" name="rating" value="1" id="r1" class="star-radio" required style="position: absolute; opacity: 0; pointer-events: none;">
+                                <button type="button" class="star-btn is-active" data-value="1" aria-label="1 star - Needs Improvement">
+                                    <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </button>
+                                <input type="radio" name="rating" value="2" id="r2" class="star-radio" style="position: absolute; opacity: 0; pointer-events: none;">
+                                <button type="button" class="star-btn is-active" data-value="2" aria-label="2 stars - Fair">
+                                    <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </button>
+                                <input type="radio" name="rating" value="3" id="r3" class="star-radio" style="position: absolute; opacity: 0; pointer-events: none;">
+                                <button type="button" class="star-btn is-active" data-value="3" aria-label="3 stars - Good">
+                                    <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </button>
+                                <input type="radio" name="rating" value="4" id="r4" class="star-radio" style="position: absolute; opacity: 0; pointer-events: none;">
+                                <button type="button" class="star-btn is-active" data-value="4" aria-label="4 stars - Very Good">
+                                    <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </button>
+                                <input type="radio" name="rating" value="5" id="r5" class="star-radio" checked style="position: absolute; opacity: 0; pointer-events: none;">
+                                <button type="button" class="star-btn is-active" data-value="5" aria-label="5 stars - Outstanding">
+                                    <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                </button>
+                            </div>
+                            <div class="star-rating-caption" id="starRatingCaption">5.0 / 5.0 — Outstanding</div>
+                        </div>
+                        <div class="input-row reveal fade-up delay-2">
+                            <input type="text" name="name" placeholder="Your Name" required class="premium-input feedback-input">
+                            <input type="email" name="email" placeholder="Email (optional)" class="premium-input feedback-input">
+                        </div>
+                        <textarea name="message" placeholder="What features would you love to see or ask the developer?" required class="premium-input feedback-input feedback-textarea reveal fade-up delay-3"></textarea>
+                        <button type="submit" class="btn btn-dark btn-submit reveal fade-up delay-4">Send Feedback</button>
+                    </form>
+
+                    <div id="feedbackSuccessMsg" class="feedback-success-card" style="display: none; margin-top: 1.5rem;">
+                        <div class="success-icon">🎉</div>
+                        <h3>Thank you for your thoughts!</h3>
+                        <p>Your question & feedback has been saved and sent to the developer.</p>
+                        <button type="button" class="btn btn-dark" id="btnSeeResponsesAfterSubmit">View Responses & Answers →</button>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-submit">Join Waitlist</button>
-                </form>
+                </div>
+
+                <!-- 2. Community Responses View -->
+                <div id="feedbackResponsesContainer" class="feedback-view" style="display: none;">
+                    <div class="responses-filter-bar">
+                        <button type="button" class="rf-btn active" data-filter="all" id="filterAllResponses">All Thoughts</button>
+                        <button type="button" class="rf-btn" data-filter="answered" id="filterAnsweredResponses">Answered by Developer</button>
+                    </div>
+
+                    <div id="responsesList" class="responses-list">
+                        <!-- Populated via JavaScript from Supabase -->
+                        <div class="responses-empty">
+                            <div class="responses-empty-icon">⏳</div>
+                            <p>Loading community responses...</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -374,7 +450,8 @@
                     <a href="terms.html">Terms & Conditions</a>
                     <a href="mailto:ridesynk01@gmail.com">Contact us</a>
                     <a href="about.html">About Us</a>
-                    <a href="#waitlist">Stay Connected</a>
+                    <a href="updates.html">Updates</a>
+                    <a href="https://app.ridesynk.in">Launch Web App</a>
                 </div>
                 <p class="copyright">&copy; 2026 RideSynk App. All rights reserved.</p>
             </div>

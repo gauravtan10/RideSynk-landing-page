@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Updates & Changelog | RideSynk</title>
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Updates & Changelog | RideSynk">
+    <meta property="og:description" content="Latest releases, patch notes, and feature updates for RideSynk.">
+    <meta property="og:image" content="https://ridesynk.vercel.app/og-logo.png">
+    <meta property="og:url" content="https://ridesynk.vercel.app/updates.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Updates & Changelog | RideSynk">
+    <meta name="twitter:description" content="Latest releases, patch notes, and feature updates for RideSynk.">
+    <meta name="twitter:image" content="https://ridesynk.vercel.app/og-logo.png">
+    <meta name="description" content="Latest releases, patch notes, and feature updates for RideSynk.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .updates-page-main {
+            padding-top: 130px;
+            min-height: 82vh;
+            background-color: var(--bg-light);
+            display: flex;
+            align-items: center;
+        }
+
+        .updates-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .updates-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--bg-dark);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .updates-badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .updates-title {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            color: var(--bg-dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .updates-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .empty-state-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 28px;
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .empty-state-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .empty-icon-wrap {
+            width: 84px;
+            height: 84px;
+            margin: 0 auto 1.75rem;
+            border-radius: 50%;
+            background: rgba(249, 86, 31, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .empty-icon-wrap svg {
+            width: 40px;
+            height: 40px;
+            color: var(--accent);
+        }
+
+        .empty-icon-pulse {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(249, 86, 31, 0.2);
+            animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.85); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.3; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .empty-card-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .empty-card-desc {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 480px;
+            margin: 0 auto 2.25rem;
+        }
+
+        .empty-card-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .empty-card-actions .btn {
+            padding: 0.875rem 1.75rem;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" style="text-decoration: none;">RideSynk</a>
+            <a href="index.html" class="nav-cta">← Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="updates-page-main padding-y">
+        <div class="container">
+            <div class="updates-header">
+                <div class="updates-badge">
+                    <span class="updates-badge-dot"></span>
+                    Changelog & Releases
+                </div>
+                <h1 class="updates-title">Product Updates</h1>
+                <p class="updates-sub">Stay informed on the latest features, releases, and improvements made to RideSynk.</p>
+            </div>
+
+            <!-- Empty State per user requirement -->
+            <div class="empty-state-card">
+                <div class="empty-icon-wrap">
+                    <div class="empty-icon-pulse"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </div>
+                <h2 class="empty-card-title">No Updates Published Yet</h2>
+                <p class="empty-card-desc">
+                    We are currently building the next version of RideSynk. Patch notes, new feature announcements, and beta releases will be listed here as soon as they roll out.
+                </p>
+                <div class="empty-card-actions">
+                    <a href="index.html#feedback" class="btn btn-dark">Suggest a Feature</a>
+                    <a href="index.html" class="btn btn-primary" style="border: 1px solid rgba(0,0,0,0.1);">Return Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">RideSynk</h3>
+                    <p class="footer-tagline">Making group rides safer and easier. Built for riders, by riders.</p>
+                </div>
+                <div class="footer-social">
+                    <p>Follow our journey and be part of the RideSynk community.</p>
+                    <a href="https://www.instagram.com/ride_synk?igsh=MXZpbGNnMTJra3BkNA==" class="social-link"
+                        target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                    <a href="mailto:ridesynk01@gmail.com">Contact us</a>
+                    <a href="about.html">About Us</a>
+                    <a href="updates.html">Updates</a>
+                </div>
+                <p class="copyright">&copy; 2026 RideSynk App. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

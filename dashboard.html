@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RideSynk | Developer Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --dev-bg: #08080d;
+            --dev-card-bg: #101018;
+            --dev-border: rgba(255, 255, 255, 0.08);
+            --dev-accent: #f9561f;
+            --dev-success: #22c55e;
+            --dev-warning: #f59e0b;
+            --dev-text: #f3f4f6;
+            --dev-sub: #9ca3af;
+        }
+
+        body {
+            background-color: var(--dev-bg);
+            color: var(--dev-text);
+            font-family: var(--font-main);
+            min-height: 100vh;
+        }
+
+        /* Top Navbar */
+        .dev-nav {
+            background: rgba(16, 16, 24, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--dev-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .dev-nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dev-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .dev-logo-group h1 {
+            font-size: 1.35rem;
+            color: #fff;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .dev-badge-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .dev-live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+        }
+
+        .dev-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dev-btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 100px;
+            border: 1px solid var(--dev-border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--dev-text);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .dev-btn-sm:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        /* Passcode Gate Modal */
+        #authGateModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 13, 0.96);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .auth-card {
+            background: #11111a;
+            border: 1px solid var(--dev-border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(249, 86, 31, 0.12);
+            border: 1px solid rgba(249, 86, 31, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.75rem;
+        }
+
+        .auth-card h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-card p {
+            color: var(--dev-sub);
+            font-size: 0.9rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--dev-border);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .auth-input:focus {
+            border-color: var(--dev-accent);
+            box-shadow: 0 0 0 2px rgba(249, 86, 31, 0.2);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: var(--dev-accent);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .auth-btn:hover {
+            opacity: 0.9;
+        }
+
+        .auth-hint {
+            font-size: 0.78rem;
+            color: var(--dev-sub);
+            margin-top: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--dev-card-bg);
+            border: 1px solid var(--dev-border);
+            border-radius: 18px;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--dev-sub);
+            margin-bottom: 0.35rem;
+        }
+
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Filter & Search Bar */
+        .controls-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            background: var(--dev-card-bg);
+            border: 1px solid var(--dev-border);
+            border-radius: 16px;
+            padding: 0.85rem 1.25rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.45rem 1rem;
+            border-radius: 100px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--dev-sub);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--dev-border);
+            border-radius: 100px;
+            padding: 0.4rem 1rem;
+            flex: 1;
+            max-width: 320px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 0.88rem;
+            width: 100%;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Question Cards */
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .q-card {
+            background: var(--dev-card-bg);
+            border: 1px solid var(--dev-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            transition: border-color 0.2s ease;
+        }
+
+        .q-card.is-pending {
+            border-left: 4px solid var(--dev-warning);
+        }
+
+        .q-card.is-answered {
+            border-left: 4px solid var(--dev-success);
+        }
+
+        .q-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .q-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .q-avatar {
+            width: 42px;
+            height: 42px;
+            background: #1a1a28;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .q-meta-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .q-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .q-email {
+            font-size: 0.82rem;
+            color: var(--dev-sub);
+            margin-top: 2px;
+        }
+
+        .q-email a {
+            color: var(--dev-sub);
+            text-decoration: underline;
+        }
+
+        .q-status-badge {
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .q-status-badge.pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .q-status-badge.answered {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .q-body {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 1.1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+            white-space: pre-line;
+        }
+
+        /* Developer Reply Box */
+        .q-reply-section {
+            background: #14141e;
+            border: 1px solid rgba(249, 86, 31, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .q-reply-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .q-reply-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--dev-accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .q-reply-textarea {
+            width: 100%;
+            min-height: 90px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--dev-border);
+            border-radius: 10px;
+            padding: 0.85rem;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+            margin-bottom: 0.75rem;
+        }
+
+        .q-reply-textarea:focus {
+            border-color: var(--dev-accent);
+        }
+
+        .q-quick-snippets {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 0.85rem;
+        }
+
+        .snippet-chip {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            color: var(--dev-sub);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .snippet-chip:hover {
+            background: rgba(249, 86, 31, 0.15);
+            border-color: var(--dev-accent);
+            color: #fff;
+        }
+
+        .q-actions-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-post-reply {
+            background: var(--dev-accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .btn-post-reply:hover {
+            transform: scale(1.03);
+        }
+
+        /* Delete Button (Silent Dev Delete) */
+        .btn-delete-q {
+            background: transparent;
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 0.55rem 1rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-delete-q:hover {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+        }
+
+        /* Toast notifications */
+        #devToast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #181824;
+            color: #fff;
+            border: 1px solid var(--dev-border);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            font-weight: 500;
+        }
+
+        #devToast.show {
+            display: flex;
+            animation: slideUpToast 0.3s ease-out;
+        }
+
+        @keyframes slideUpToast {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <!-- Passcode Gate -->
+    <div id="authGateModal">
+        <div class="auth-card">
+            <div class="auth-icon">🔐</div>
+            <h2>Developer Portal</h2>
+            <p>Enter your developer passcode to access user feedback and post official answers.</p>
+            <input type="password" id="passcodeInput" class="auth-input" placeholder="••••••••" autofocus>
+            <button type="button" id="btnUnlock" class="auth-btn">Unlock Dashboard</button>
+            
+        </div>
+    </div>
+
+    <!-- Dashboard Header -->
+    <nav class="dev-nav">
+        <div class="container dev-nav-container">
+            <div class="dev-logo-group">
+                <h1>RideSynk Developer Hub</h1>
+                <span class="dev-badge-live">
+                    <span class="dev-live-dot"></span> Supabase Connected
+                </span>
+            </div>
+            <div class="dev-nav-actions">
+                <a href="index.html" class="dev-btn-sm" target="_blank">Open Website ↗</a>
+                <a href="updates.html" class="dev-btn-sm" target="_blank">Updates Page</a>
+                <button type="button" id="btnLockDashboard" class="dev-btn-sm">🔒 Lock</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Area -->
+    <main class="container" style="padding-top: 2rem;">
+        <!-- Metrics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Questions</div>
+                <div class="stat-value" id="metricTotal">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Answers</div>
+                <div class="stat-value" style="color: #f59e0b;" id="metricPending">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Answered</div>
+                <div class="stat-value" style="color: #22c55e;" id="metricAnswered">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Excitement</div>
+                <div class="stat-value" style="color: #60a5fa;" id="metricAvgRating">5.0 ★</div>
+            </div>
+        </div>
+
+        <!-- Controls: Filters & Search -->
+        <div class="controls-bar">
+            <div class="filter-tabs">
+                <button type="button" class="filter-tab active" data-tab="all" id="tabAll">All (<span id="countAll">0</span>)</button>
+                <button type="button" class="filter-tab" data-tab="pending" id="tabPending">Needs Reply (<span id="countPending">0</span>)</button>
+                <button type="button" class="filter-tab" data-tab="answered" id="tabAnswered">Answered (<span id="countAnswered">0</span>)</button>
+            </div>
+
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" id="searchInput" placeholder="Search by name, question, or email...">
+            </div>
+
+            <button type="button" class="dev-btn-sm" id="btnRefresh">↻ Refresh</button>
+        </div>
+
+        <!-- Question List Container -->
+        <div id="questionsContainer" class="questions-container">
+            <div style="text-align:center; padding: 3rem; color: var(--dev-sub);">
+                Connecting to database...
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="devToast">
+        <span id="toastIcon">✅</span>
+        <span id="toastMsg">Action completed successfully</span>
+    </div>
+
+    <script>
+        const SUPABASE_URL = "https://dsiwrotsqvjfjonrctdy.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaXdyb3RzcXZqZmpvbnJjdGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMTU3OTQsImV4cCI6MjA4NzY5MTc5NH0.56By-U13BEPNm2VGj2mlFyzVUy8Py8xR5d0zS7x5GoY";
+        const MASTER_PASSCODE = "ridesynk-dev";
+
+        const ratingEmojiMap = { 1: "😫", 2: "😐", 3: "😊", 4: "🔥", 5: "🚀" };
+
+        let allQuestions = [];
+        let activeTab = "all";
+        let searchQuery = "";
+
+        // Elements
+        const authGateModal = document.getElementById("authGateModal");
+        const passcodeInput = document.getElementById("passcodeInput");
+        const btnUnlock = document.getElementById("btnUnlock");
+        const btnLockDashboard = document.getElementById("btnLockDashboard");
+        const questionsContainer = document.getElementById("questionsContainer");
+        const btnRefresh = document.getElementById("btnRefresh");
+        const searchInput = document.getElementById("searchInput");
+
+        // Auth Gate Check
+        function checkAuth() {
+            if (sessionStorage.getItem("ridesynk_dev_auth") === "true") {
+                authGateModal.style.display = "none";
+                fetchQuestions();
+            } else {
+                authGateModal.style.display = "flex";
+            }
+        }
+
+        btnUnlock.addEventListener("click", () => {
+            const entered = passcodeInput.value.trim();
+            if (entered === MASTER_PASSCODE) {
+                sessionStorage.setItem("ridesynk_dev_auth", "true");
+                authGateModal.style.display = "none";
+                showToast("Welcome Gaurav! Connected to live database.", "🚀");
+                fetchQuestions();
+            } else {
+                alert("Incorrect passcode.");
+            }
+        });
+
+        passcodeInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") btnUnlock.click();
+        });
+
+        btnLockDashboard.addEventListener("click", () => {
+            sessionStorage.removeItem("ridesynk_dev_auth");
+            location.reload();
+        });
+
+        // Toast Helper
+        function showToast(msg, icon = "✅") {
+            const toast = document.getElementById("devToast");
+            document.getElementById("toastMsg").textContent = msg;
+            document.getElementById("toastIcon").textContent = icon;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return "";
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Fetch Questions from Supabase
+        async function fetchQuestions() {
+            questionsContainer.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--dev-sub);">Fetching latest questions...</div>`;
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/feedback_questions?is_deleted=eq.false&order=created_at.desc`, {
+                    headers: {
+                        "apikey": SUPABASE_ANON_KEY,
+                        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+                if (!res.ok) throw new Error("Failed to load questions");
+                allQuestions = await res.json();
+                updateMetrics();
+                renderDashboard();
+            } catch (err) {
+                console.error(err);
+                questionsContainer.innerHTML = `<div style="text-align:center; padding: 3rem; color: #ef4444;">Error loading questions from Supabase. Check console.</div>`;
+            }
+        }
+
+        function updateMetrics() {
+            const total = allQuestions.length;
+            const pending = allQuestions.filter(q => !q.dev_response || !q.dev_response.trim()).length;
+            const answered = allQuestions.filter(q => q.dev_response && q.dev_response.trim().length > 0).length;
+
+            let avgRating = 5.0;
+            if (total > 0) {
+                const sum = allQuestions.reduce((acc, q) => acc + (q.rating || 5), 0);
+                avgRating = (sum / total).toFixed(1);
+            }
+
+            document.getElementById("metricTotal").textContent = total;
+            document.getElementById("metricPending").textContent = pending;
+            document.getElementById("metricAnswered").textContent = answered;
+            document.getElementById("metricAvgRating").textContent = `${avgRating} ★`;
+
+            document.getElementById("countAll").textContent = total;
+            document.getElementById("countPending").textContent = pending;
+            document.getElementById("countAnswered").textContent = answered;
+        }
+
+        function renderDashboard() {
+            let filtered = allQuestions;
+
+            if (activeTab === "pending") {
+                filtered = filtered.filter(q => !q.dev_response || !q.dev_response.trim());
+            } else if (activeTab === "answered") {
+                filtered = filtered.filter(q => q.dev_response && q.dev_response.trim().length > 0);
+            }
+
+            if (searchQuery) {
+                const qLower = searchQuery.toLowerCase();
+                filtered = filtered.filter(q => 
+                    (q.name && q.name.toLowerCase().includes(qLower)) ||
+                    (q.message && q.message.toLowerCase().includes(qLower)) ||
+                    (q.email && q.email.toLowerCase().includes(qLower))
+                );
+            }
+
+            if (filtered.length === 0) {
+                questionsContainer.innerHTML = `
+                    <div style="text-align:center; padding: 4rem 1rem; color: var(--dev-sub); background: var(--dev-card-bg); border-radius: 20px; border: 1px dashed var(--dev-border);">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎉</div>
+                        <h3>No questions found in this view</h3>
+                        <p style="font-size: 0.9rem; margin-top: 4px;">You are all caught up!</p>
+                    </div>`;
+                return;
+            }
+
+            questionsContainer.innerHTML = filtered.map(q => {
+                const isAnswered = q.dev_response && q.dev_response.trim().length > 0;
+                const ratingEmoji = ratingEmojiMap[q.rating] || "🚀";
+                const createdDate = new Date(q.created_at).toLocaleString();
+                const avatar = (q.name || "R").charAt(0).toUpperCase();
+
+                return `
+                    <div class="q-card ${isAnswered ? 'is-answered' : 'is-pending'}" id="card-${q.id}">
+                        <div class="q-header">
+                            <div class="q-user-info">
+                                <div class="q-avatar">${escapeHtml(avatar)}</div>
+                                <div class="q-meta-text">
+                                    <div class="q-name">
+                                        ${escapeHtml(q.name)}
+                                        <span title="Rating: ${q.rating || 5}/5" style="display: inline-flex; align-items: center; gap: 3px; font-size: 0.75rem; font-weight: 700; color: #d97706; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25); padding: 2px 7px; border-radius: 20px;">
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                            ${q.rating || 5}.0
+                                        </span>
+                                    </div>
+                                    <div class="q-email">
+                                        ${q.email ? `<a href="mailto:${escapeHtml(q.email)}">${escapeHtml(q.email)}</a>` : 'No email provided'} · <span>${createdDate}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="q-status-badge ${isAnswered ? 'answered' : 'pending'}">
+                                ${isAnswered ? '✓ Answered' : '⏳ Needs Reply'}
+                            </span>
+                        </div>
+
+                        <div class="q-body">
+                            ${escapeHtml(q.message)}
+                        </div>
+
+                        <!-- Developer Reply Form -->
+                        <div class="q-reply-section">
+                            <div class="q-reply-header">
+                                <span class="q-reply-title">
+                                    🛠️ Your Developer Response (Visible on Website)
+                                </span>
+                                ${q.dev_responded_at ? `<span style="font-size: 0.75rem; color: var(--dev-sub);">Replied on ${new Date(q.dev_responded_at).toLocaleDateString()}</span>` : ''}
+                            </div>
+
+                            <div class="q-quick-snippets">
+                                <span class="snippet-chip" onclick="insertSnippet('${q.id}', 'Thanks for the feedback! We are planning this for our upcoming version.')">💡 Plan for next version</span>
+                                <span class="snippet-chip" onclick="insertSnippet('${q.id}', 'Great suggestion! We are actively testing this feature on the road.')">🏍️ Actively testing</span>
+                                <span class="snippet-chip" onclick="insertSnippet('${q.id}', 'Thank you for supporting RideSynk! Appreciate your thoughts.')">🙏 Thank you note</span>
+                            </div>
+
+                            <textarea id="replyText-${q.id}" class="q-reply-textarea" placeholder="Type your developer response to this rider...">${escapeHtml(q.dev_response || '')}</textarea>
+
+                            <div class="q-actions-bar">
+                                <button type="button" class="btn-post-reply" onclick="postDeveloperReply('${q.id}')">
+                                    ${isAnswered ? 'Update Response' : 'Post Official Response'}
+                                </button>
+
+                                <button type="button" class="btn-delete-q" title="Delete question silently" onclick="deleteUserQuestion('${q.id}', '${escapeHtml(q.name)}')">
+                                    🗑️ Delete Message
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        // Quick snippet insert
+        window.insertSnippet = function(id, text) {
+            const textarea = document.getElementById(`replyText-${id}`);
+            if (textarea) {
+                textarea.value = text;
+                textarea.focus();
+            }
+        };
+
+        // Post / Update Developer Reply
+        window.postDeveloperReply = async function(id) {
+            const textarea = document.getElementById(`replyText-${id}`);
+            const replyText = textarea.value.trim();
+
+            if (!replyText) {
+                alert("Please enter a response before posting.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/feedback_questions?id=eq.${id}`, {
+                    method: "PATCH",
+                    headers: {
+                        "apikey": SUPABASE_ANON_KEY,
+                        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=representation"
+                    },
+                    body: JSON.stringify({
+                        dev_response: replyText,
+                        dev_responded_at: new Date().toISOString(),
+                        status: "answered"
+                    })
+                });
+
+                if (!res.ok) throw new Error("Failed to update response");
+
+                showToast("Response published live to the website!", "🚀");
+                await fetchQuestions();
+            } catch (err) {
+                console.error(err);
+                alert("Error posting response. Please try again.");
+            }
+        };
+
+        // Silent Delete Message (as requested: "DEVELOPER HAVE POWER TO DELET THE SER MESSAGE FROM DEVELOPER END (WITHOUT KNOWING TO USER)")
+        window.deleteUserQuestion = async function(id, name) {
+            const confirmDel = confirm(`Are you sure you want to delete the message from "${name}"?\n\nThis will silently remove it from the database and the live website.`);
+            if (!confirmDel) return;
+
+            try {
+                // Soft delete via is_deleted flag or hard DELETE
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/feedback_questions?id=eq.${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "apikey": SUPABASE_ANON_KEY,
+                        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (!res.ok) throw new Error("Delete failed");
+
+                showToast("Message deleted silently.", "🗑️");
+                // Remove from local list and update
+                allQuestions = allQuestions.filter(q => q.id !== id);
+                updateMetrics();
+                renderDashboard();
+            } catch (err) {
+                console.error(err);
+                alert("Error deleting question. Please check database permissions.");
+            }
+        };
+
+        // Filter Tabs
+        document.querySelectorAll(".filter-tab").forEach(tab => {
+            tab.addEventListener("click", () => {
+                document.querySelectorAll(".filter-tab").forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+                activeTab = tab.getAttribute("data-tab");
+                renderDashboard();
+            });
+        });
+
+        // Search Input
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value.trim();
+            renderDashboard();
+        });
+
+        // Refresh
+        btnRefresh.addEventListener("click", fetchQuestions);
+
+        // Run auth check on load
+        checkAuth();
+    </script>
+</body>
+
+</html>
