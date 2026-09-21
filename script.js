@@ -485,4 +485,29 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '1';
         }
     });
+
+    // 9. Update Notification Badge System
+    // Tracks unread updates via localStorage. Badge disappears once user visits updates.html.
+    const heroUpdatesBadge = document.getElementById('heroUpdatesBadge');
+    if (heroUpdatesBadge) {
+        // All available update IDs — add new entries here when publishing new updates
+        const allUpdates = ['reason-for-delay-v2'];
+
+        let readUpdates = [];
+        try {
+            const stored = localStorage.getItem('ridesynk_read_updates');
+            if (stored) readUpdates = JSON.parse(stored);
+        } catch (e) {
+            // localStorage not available
+        }
+
+        const unreadCount = allUpdates.filter(id => !readUpdates.includes(id)).length;
+
+        if (unreadCount > 0) {
+            heroUpdatesBadge.textContent = unreadCount;
+            heroUpdatesBadge.classList.remove('is-hidden');
+        } else {
+            heroUpdatesBadge.classList.add('is-hidden');
+        }
+    }
 });

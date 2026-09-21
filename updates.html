@@ -25,8 +25,6 @@
             padding-top: 130px;
             min-height: 82vh;
             background-color: var(--bg-light);
-            display: flex;
-            align-items: center;
         }
 
         .updates-header {
@@ -72,89 +70,6 @@
             max-width: 600px;
             margin: 0 auto;
         }
-
-        .empty-state-card {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 28px;
-            padding: 4rem 2rem;
-            text-align: center;
-            max-width: 650px;
-            margin: 0 auto;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .empty-state-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        .empty-icon-wrap {
-            width: 84px;
-            height: 84px;
-            margin: 0 auto 1.75rem;
-            border-radius: 50%;
-            background: rgba(249, 86, 31, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .empty-icon-wrap svg {
-            width: 40px;
-            height: 40px;
-            color: var(--accent);
-        }
-
-        .empty-icon-pulse {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 2px solid rgba(249, 86, 31, 0.2);
-            animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(0.85); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 0.3; }
-            100% { transform: scale(1.3); opacity: 0; }
-        }
-
-        .empty-card-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--bg-dark);
-            margin-bottom: 0.75rem;
-        }
-
-        .empty-card-desc {
-            font-size: 1.05rem;
-            color: #666;
-            line-height: 1.6;
-            max-width: 480px;
-            margin: 0 auto 2.25rem;
-        }
-
-        .empty-card-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .empty-card-actions .btn {
-            padding: 0.875rem 1.75rem;
-            font-size: 0.95rem;
-        }
     </style>
 </head>
 
@@ -175,30 +90,56 @@
                     <span class="updates-badge-dot"></span>
                     Changelog & Releases
                 </div>
-                <h1 class="updates-title">Product Updates</h1>
+                <h1 class="updates-title">Updates</h1>
                 <p class="updates-sub">Stay informed on the latest features, releases, and improvements made to RideSynk.</p>
             </div>
 
-            <!-- Empty State per user requirement -->
-            <div class="empty-state-card">
-                <div class="empty-icon-wrap">
-                    <div class="empty-icon-pulse"></div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                    </svg>
+            <!-- Updates Feed -->
+            <div class="updates-feed">
+
+                <!-- Update 1: Reason for Delay -->
+                <div class="update-card update-card-clickable" id="updateReasonForDelay" role="button" tabindex="0" aria-label="Reason for the Delay — Tap to view full update details">
+                    <div class="update-header">
+                        <div class="update-meta">
+                            <span class="update-status-dot"></span>
+                            <span>Platform Status</span>
+                            <span>•</span>
+                            <span>September 2026</span>
+                        </div>
+                        <h2 class="update-title">Reason for the Delay</h2>
+                        <div class="update-card-action">
+                            <span>View Full Update</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7"></path>
+                                <path d="M7 7h10v10"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <h2 class="empty-card-title">No Updates Published Yet</h2>
-                <p class="empty-card-desc">
-                    We are currently building the next version of RideSynk. Patch notes, new feature announcements, and beta releases will be listed here as soon as they roll out.
-                </p>
-                <div class="empty-card-actions">
-                    <a href="index.html#feedback" class="btn btn-dark">Suggest a Feature</a>
-                    <a href="index.html" class="btn btn-primary" style="border: 1px solid rgba(0,0,0,0.1);">Return Home</a>
-                </div>
+
             </div>
+
+            <!-- Review Us CTA Banner -->
+            <div class="updates-review-cta">
+                <div class="review-cta-content">
+                    <div class="review-cta-badge">⭐ Community Feedback</div>
+                    <h3 class="review-cta-title">Share your thoughts with us</h3>
+                    <p class="review-cta-desc">Help us make RideSynk even better. Rate our features or ask the developer anything.</p>
+                </div>
+                <a href="index.html#feedback" class="btn btn-primary review-cta-btn">Review Us →</a>
+            </div>
+
+            <p class="caught-up-msg">You're all caught up! Check back later for new updates.</p>
         </div>
     </main>
+
+    <!-- Image Lightbox Modal -->
+    <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-label="Platform status update image">
+        <div class="image-modal-content">
+            <button class="image-modal-close" id="imageModalClose" aria-label="Close image">&times;</button>
+            <img class="image-modal-img" src="platform-status-update.jpg" alt="Platform Status Update — Reasons for the Delay: Capital Constraints, Team & Coordination, Development Timeline. User Compensation & Benefits included." id="imageModalImg">
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -227,6 +168,57 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    // Updates page — Image modal + mark-as-read logic
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('imageModal');
+        var cardBtn = document.getElementById('updateReasonForDelay');
+        var closeBtn = document.getElementById('imageModalClose');
+
+        function openModal() {
+            if (modal) modal.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            if (modal) modal.classList.remove('is-active');
+            document.body.style.overflow = '';
+        }
+
+        if (cardBtn) {
+            cardBtn.addEventListener('click', openModal);
+            cardBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal();
+                }
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeModal();
+            });
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Mark all current updates as read when user visits this page
+        var currentUpdates = ['reason-for-delay-v2'];
+        try {
+            localStorage.setItem('ridesynk_read_updates', JSON.stringify(currentUpdates));
+        } catch (e) {
+            // localStorage not available
+        }
+    });
+    </script>
 </body>
 
 </html>

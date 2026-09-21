@@ -1502,3 +1502,277 @@ a {
 .ro-ck { color: #60a5fa; font-size: 14px; margin-left: auto; }
 @keyframes mockup-spin { from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
 .spin-anim { display: inline-block; animation: mockup-spin 2s linear infinite; }
+
+/* Update Notification Badge */
+.update-notif-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 22px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 3px var(--bg-light), 0 4px 12px rgba(239, 68, 68, 0.45);
+    animation: notifPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none;
+    z-index: 20;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.update-notif-badge.is-hidden {
+    opacity: 0;
+    transform: scale(0.4);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+@keyframes notifPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 3px var(--bg-light), 0 4px 12px rgba(239, 68, 68, 0.45);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 4px var(--bg-light), 0 6px 16px rgba(239, 68, 68, 0.6);
+    }
+}
+
+/* Updates Page Styles */
+.updates-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.update-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    padding: 2.25rem 2.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+    text-align: left;
+}
+
+.update-card-clickable {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.update-card-clickable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.07);
+    border-color: rgba(249, 86, 31, 0.35);
+}
+
+.update-card-clickable:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.update-header {
+    margin-bottom: 0;
+}
+
+.update-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.update-status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    animation: pulse-ring 2.5s infinite;
+}
+
+.update-title {
+    font-size: 1.85rem;
+    color: var(--bg-dark);
+    margin-bottom: 0.5rem;
+}
+
+.update-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.95rem;
+    transition: gap 0.2s ease;
+}
+
+.update-card-clickable:hover .update-card-action {
+    gap: 12px;
+}
+
+/* Image Lightbox Modal */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+}
+
+.image-modal.is-active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.image-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.image-modal.is-active .image-modal-content {
+    transform: scale(1);
+}
+
+.image-modal-img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    object-fit: contain;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 42px;
+    height: 42px;
+    background: #18181b;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+    z-index: 20;
+}
+
+.image-modal-close:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .image-modal-close {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.25rem;
+    }
+}
+
+/* Review Us CTA Banner */
+.updates-review-cta {
+    margin: 3.5rem auto 1.5rem;
+    max-width: 800px;
+    background: linear-gradient(135deg, #18181b 0%, #09090b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    color: #ffffff;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+}
+
+.review-cta-content {
+    text-align: left;
+}
+
+.review-cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.review-cta-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.35rem;
+}
+
+.review-cta-desc {
+    font-size: 0.92rem;
+    color: #a1a1aa;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.review-cta-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .updates-review-cta {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.8rem;
+    }
+    .review-cta-content {
+        text-align: center;
+    }
+}
+
+.caught-up-msg {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+}
