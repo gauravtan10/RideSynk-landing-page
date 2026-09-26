@@ -299,7 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     "apikey": SUPABASE_ANON_KEY,
                     "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-                }
+                },
+                cache: "no-store"
             });
             if (!res.ok) throw new Error("Failed to fetch responses");
             const data = await res.json();

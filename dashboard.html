@@ -704,7 +704,8 @@
                     headers: {
                         "apikey": SUPABASE_ANON_KEY,
                         "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-                    }
+                    },
+                    cache: "no-store"
                 });
                 if (!res.ok) throw new Error("Failed to load questions");
                 allQuestions = await res.json();
@@ -842,11 +843,18 @@
         // Post / Update Developer Reply
         window.postDeveloperReply = async function(id) {
             const textarea = document.getElementById(`replyText-${id}`);
-            const replyText = textarea.value.trim();
+            const replyText = textarea ? textarea.value.trim() : "";
 
             if (!replyText) {
                 alert("Please enter a response before posting.");
                 return;
+            }
+
+            const btn = document.querySelector(`button[onclick="postDeveloperReply('${id}')"]`);
+            const origText = btn ? btn.textContent : "";
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = "Publishing...";
             }
 
             try {
@@ -867,11 +875,20 @@
 
                 if (!res.ok) throw new Error("Failed to update response");
 
+                const updated = await res.json();
+                if (!updated || updated.length === 0) {
+                    throw new Error("No record was updated in database.");
+                }
+
                 showToast("Response published live to the website!", "🚀");
                 await fetchQuestions();
             } catch (err) {
                 console.error(err);
-                alert("Error posting response. Please try again.");
+                alert("Error posting response: " + (err.message || err));
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = origText;
+                }
             }
         };
 
